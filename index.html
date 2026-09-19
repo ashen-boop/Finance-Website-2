@@ -43,17 +43,34 @@ body.dark .filter-chip.active{background:#1a3a2a;border-color:var(--accent);}
 
 .app{max-width:1440px;width:100%;background:var(--surface);border-radius:var(--radius-xl);box-shadow:var(--shadow);padding:28px 28px 40px;transition:background 0.2s,color 0.2s;}
 .app-grid{display:flex;gap:28px;align-items:flex-start;}
-.sidebar{width:220px;flex-shrink:0;display:flex;flex-direction:column;gap:6px;position:sticky;top:20px;align-self:flex-start;}
-.sidebar .logo{margin-bottom:18px;padding-left:8px;}
+.sidebar{width:240px;flex-shrink:0;display:flex;flex-direction:column;gap:4px;position:sticky;top:20px;align-self:flex-start;}
+.sidebar .logo{margin-bottom:20px;padding-left:8px;}
 .sidebar .logo h1{font-size:1.7rem;font-weight:400;letter-spacing:-0.3px;color:var(--text);}
 .sidebar .logo span{font-weight:300;color:var(--text-secondary);}
 .sidebar .logo i{color:var(--accent);margin-right:6px;}
-.nav-item{display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:40px;color:var(--text-secondary);font-size:0.9rem;cursor:pointer;transition:var(--transition);border:none;background:transparent;width:100%;text-align:left;}
-.nav-item i{width:20px;font-size:1rem;color:var(--text-tertiary);}
-.nav-item:hover{background:var(--surface-2);color:var(--text);}
-.nav-item.active{background:#e9f2ec;color:var(--accent);}
-body.dark .nav-item.active{background:#1a3a2a;color:#6fcf97;}
-.nav-item.active i{color:var(--accent);}
+
+/* ---- NAV DROPDOWN GROUPS ---- */
+.nav-group{position:relative;width:100%;}
+.nav-group-btn{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:40px;color:var(--text-secondary);font-size:0.9rem;cursor:pointer;transition:var(--transition);border:none;background:transparent;width:100%;text-align:left;}
+.nav-group-btn:hover{background:var(--surface-2);color:var(--text);}
+.nav-group-btn.open{background:#e9f2ec;color:var(--accent);}
+body.dark .nav-group-btn.open{background:#1a3a2a;color:#6fcf97;}
+.nav-group-btn i.group-icon{width:20px;font-size:1rem;color:var(--text-tertiary);}
+.nav-group-btn.open i.group-icon{color:var(--accent);}
+.nav-group-btn .chev{margin-left:auto;font-size:0.7rem;color:var(--text-tertiary);transition:transform 0.2s ease;}
+.nav-group-btn.open .chev{transform:rotate(180deg);}
+.nav-submenu{display:none;flex-direction:column;gap:2px;padding:4px 0 4px 20px;margin-top:2px;}
+.nav-submenu.open{display:flex;animation:submenuIn 0.2s ease;}
+@keyframes submenuIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
+.nav-subitem{display:flex;align-items:center;gap:12px;padding:8px 14px;border-radius:30px;color:var(--text-secondary);font-size:0.82rem;cursor:pointer;transition:var(--transition);border:none;background:transparent;width:100%;text-align:left;position:relative;}
+.nav-subitem::before{content:'';position:absolute;left:-8px;top:50%;transform:translateY(-50%);width:4px;height:4px;border-radius:50%;background:var(--text-tertiary);opacity:0.4;}
+.nav-subitem:hover{background:var(--surface-2);color:var(--text);}
+.nav-subitem.active{background:#e9f2ec;color:var(--accent);}
+body.dark .nav-subitem.active{background:#1a3a2a;color:#6fcf97;}
+.nav-subitem.active::before{background:var(--accent);opacity:1;width:6px;height:6px;}
+.nav-subitem i{width:18px;font-size:0.85rem;color:var(--text-tertiary);}
+.nav-subitem.active i{color:var(--accent);}
+
 .sidebar-footer{margin-top:auto;padding-top:20px;border-top:1px solid var(--border);font-size:0.75rem;color:var(--text-tertiary);padding-left:12px;}
 .main-content{flex:1;min-width:0;}
 
@@ -215,7 +232,6 @@ body.dark .hero-networth{background:linear-gradient(135deg,#1e262f 0%,#1a3a2a 10
 .toast i{color:var(--accent);}
 @keyframes toastIn{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
 
-/* Accounts page */
 .accounts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-bottom:24px;}
 .acc-card{background:var(--surface-2);border-radius:var(--radius-lg);padding:20px 18px;border:1px solid var(--border);transition:var(--transition);}
 .acc-card .acc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
@@ -227,7 +243,6 @@ body.dark .hero-networth{background:linear-gradient(135deg,#1e262f 0%,#1a3a2a 10
 .acc-card.positive .acc-balance{color:var(--success);}
 .acc-card.negative .acc-balance{color:var(--danger);}
 
-/* Transactions page */
 .filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;align-items:center;}
 .filter-chip{background:var(--surface);border:1px solid var(--border);border-radius:40px;padding:8px 16px;font-size:0.8rem;color:var(--text-secondary);cursor:pointer;transition:var(--transition);}
 .filter-chip.active{background:#e9f2ec;border-color:var(--accent);color:var(--accent);}
@@ -238,7 +253,6 @@ body.dark .hero-networth{background:linear-gradient(135deg,#1e262f 0%,#1a3a2a 10
 .tx-full-item:hover{background:var(--surface-2);}
 .tx-full-item .tx-cat{font-size:0.7rem;color:var(--text-tertiary);background:var(--surface-2);padding:2px 10px;border-radius:30px;}
 
-/* Budgets page */
 .budget-full-item{background:var(--surface-2);border-radius:var(--radius-md);padding:16px 18px;margin-bottom:12px;border:1px solid var(--border);}
 .budget-full-item .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;}
 .budget-full-item .cat{font-size:0.95rem;color:var(--text);}
@@ -246,10 +260,7 @@ body.dark .hero-networth{background:linear-gradient(135deg,#1e262f 0%,#1a3a2a 10
 .budget-full-item .bar-track{background:#e3eaf2;height:10px;border-radius:20px;overflow:hidden;margin-top:6px;}
 body.dark .budget-full-item .bar-track{background:#2a343f;}
 .budget-full-item .bar-fill{height:10px;border-radius:20px;background:var(--accent);transition:width 0.4s ease;}
-.budget-full-item .bar-fill.warn{background:var(--warning);}
-.budget-full-item .bar-fill.danger{background:var(--danger);}
 
-/* Bills page */
 .bill-item{background:var(--surface-2);border-radius:var(--radius-md);padding:14px 18px;margin-bottom:10px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 .bill-item .bill-info{display:flex;align-items:center;gap:14px;}
 .bill-item .bill-icon{width:40px;height:40px;border-radius:30px;background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--accent);}
@@ -261,7 +272,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
 .bill-item.paid{opacity:0.6;}
 .bill-item.paid .pay-bill-btn{background:var(--success);cursor:default;}
 
-/* Investments page */
 .inv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:20px;}
 .inv-card{background:var(--surface-2);border-radius:var(--radius-lg);padding:18px;border:1px solid var(--border);}
 .inv-card .inv-symbol{font-size:0.8rem;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.5px;}
@@ -272,7 +282,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
 .inv-card .inv-change.down{color:var(--danger);}
 .inv-bar-track{background:#e3eaf2;height:8px;border-radius:20px;overflow:hidden;margin-top:12px;}
 
-/* Credit page */
 .credit-gauge{display:flex;justify-content:center;align-items:center;flex-direction:column;padding:30px 20px;background:var(--surface-2);border-radius:var(--radius-xl);border:1px solid var(--border);margin-bottom:20px;}
 .gauge-circle{width:180px;height:180px;border-radius:50%;background:conic-gradient(var(--accent) 0% 78%, #e3eaf2 78% 100%);display:flex;align-items:center;justify-content:center;position:relative;}
 .gauge-circle::before{content:'';position:absolute;width:140px;height:140px;border-radius:50%;background:var(--surface-2);}
@@ -281,9 +290,11 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
 
 @media (max-width:1000px){
   .app-grid{flex-direction:column;}
-  .sidebar{width:100%;flex-direction:row;flex-wrap:wrap;position:static;gap:4px;padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+  .sidebar{width:100%;flex-direction:row;flex-wrap:wrap;position:static;gap:6px;padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:8px;}
   .sidebar .logo{width:100%;margin-bottom:8px;}
-  .nav-item{width:auto;padding:8px 14px;font-size:0.8rem;}
+  .nav-group{width:auto;flex:1 1 200px;}
+  .nav-group-btn{width:100%;}
+  .nav-submenu{padding-left:8px;}
   .sidebar-footer{display:none;}
 }
 @media (max-width:700px){
@@ -315,17 +326,54 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
   <div class="app-grid">
     <nav class="sidebar">
       <div class="logo"><h1><i class="fas fa-leaf"></i>Fin<span>ly</span></h1></div>
-      <button class="nav-item active" data-page="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</button>
-      <button class="nav-item" data-page="accounts"><i class="fas fa-wallet"></i> Accounts</button>
-      <button class="nav-item" data-page="transactions"><i class="fas fa-list-ul"></i> Transactions</button>
-      <button class="nav-item" data-page="budgets"><i class="fas fa-chart-bar"></i> Budgets</button>
-      <button class="nav-item" data-page="bills"><i class="fas fa-file-invoice"></i> Bills</button>
-      <button class="nav-item" data-page="investments"><i class="fas fa-chart-line"></i> Investments</button>
-      <button class="nav-item" data-page="goals"><i class="fas fa-bullseye"></i> Goals</button>
-      <button class="nav-item" data-page="credit"><i class="fas fa-id-card"></i> Credit</button>
-      <button class="nav-item" data-page="reports"><i class="fas fa-file-alt"></i> Reports</button>
-      <button class="nav-item" data-page="security"><i class="fas fa-shield-alt"></i> Security</button>
-      <button class="nav-item" data-page="settings"><i class="fas fa-cog"></i> Settings</button>
+
+      <div class="nav-group">
+        <button class="nav-group-btn" data-group="overview">
+          <i class="fas fa-chart-pie group-icon"></i> Overview
+          <i class="fas fa-chevron-down chev"></i>
+        </button>
+        <div class="nav-submenu" data-group="overview">
+          <button class="nav-subitem active" data-page="dashboard"><i class="fas fa-gauge-high"></i> Dashboard</button>
+          <button class="nav-subitem" data-page="accounts"><i class="fas fa-wallet"></i> Accounts</button>
+          <button class="nav-subitem" data-page="transactions"><i class="fas fa-list-ul"></i> Transactions</button>
+        </div>
+      </div>
+
+      <div class="nav-group">
+        <button class="nav-group-btn" data-group="planning">
+          <i class="fas fa-calendar-check group-icon"></i> Planning
+          <i class="fas fa-chevron-down chev"></i>
+        </button>
+        <div class="nav-submenu" data-group="planning">
+          <button class="nav-subitem" data-page="budgets"><i class="fas fa-chart-bar"></i> Budgets</button>
+          <button class="nav-subitem" data-page="bills"><i class="fas fa-file-invoice"></i> Bills</button>
+          <button class="nav-subitem" data-page="goals"><i class="fas fa-bullseye"></i> Goals</button>
+        </div>
+      </div>
+
+      <div class="nav-group">
+        <button class="nav-group-btn" data-group="wealth">
+          <i class="fas fa-coins group-icon"></i> Wealth
+          <i class="fas fa-chevron-down chev"></i>
+        </button>
+        <div class="nav-submenu" data-group="wealth">
+          <button class="nav-subitem" data-page="investments"><i class="fas fa-chart-line"></i> Investments</button>
+          <button class="nav-subitem" data-page="credit"><i class="fas fa-id-card"></i> Credit</button>
+          <button class="nav-subitem" data-page="reports"><i class="fas fa-file-alt"></i> Reports</button>
+        </div>
+      </div>
+
+      <div class="nav-group">
+        <button class="nav-group-btn" data-group="settings">
+          <i class="fas fa-sliders group-icon"></i> Settings
+          <i class="fas fa-chevron-down chev"></i>
+        </button>
+        <div class="nav-submenu" data-group="settings">
+          <button class="nav-subitem" data-page="security"><i class="fas fa-shield-alt"></i> Security</button>
+          <button class="nav-subitem" data-page="settings"><i class="fas fa-cog"></i> Preferences</button>
+        </div>
+      </div>
+
       <div class="sidebar-footer"><i class="fas fa-shield-alt"></i> secured · localStorage</div>
     </nav>
 
@@ -640,9 +688,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
 (function(){
   'use strict';
 
-  // ============================================================
-  // STATE
-  // ============================================================
   const DEFAULT_STATE = {
     accounts: [
       { id:'acc-checking', name:'Everyday Checking', type:'Checking', icon:'fa-wallet', color:'#1e7b4c', balance:4820.50 },
@@ -734,7 +779,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     settings: { theme:'light' }
   };
 
-  // ---------- persistence ----------
   function loadState() {
     try {
       const raw = localStorage.getItem('finly-state');
@@ -751,9 +795,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
 
   let state = loadState();
 
-  // ============================================================
-  // HELPERS
-  // ============================================================
   const $ = (id) => document.getElementById(id);
   const fmt = (n) => '$' + Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
   const fmtShort = (n) => {
@@ -774,39 +815,27 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
   }
   window.showToast = showToast;
 
-  // ============================================================
-  // DERIVED METRICS
-  // ============================================================
   function getMetrics() {
     const totalBalance = state.accounts.reduce((s,a) => s + a.balance, 0);
     const investments = state.investments.reduce((s,i) => s + i.value, 0);
     const netWorth = totalBalance + investments;
-
-    // income/expenses from transactions (last 30 days)
     const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 30);
     const recent = state.transactions.filter(t => new Date(t.date) >= cutoff);
     const income = recent.filter(t => t.amount > 0).reduce((s,t) => s+t.amount, 0);
     const expenses = recent.filter(t => t.amount < 0).reduce((s,t) => s+Math.abs(t.amount), 0);
     const savings = Math.max(0, income - expenses);
-
     const prevCutoff = new Date(); prevCutoff.setDate(prevCutoff.getDate() - 60);
     const prev = state.transactions.filter(t => new Date(t.date) >= prevCutoff && new Date(t.date) < cutoff);
     const prevIncome = prev.filter(t => t.amount > 0).reduce((s,t)=>s+t.amount,0) || 1;
     const prevExpenses = prev.filter(t => t.amount < 0).reduce((s,t)=>s+Math.abs(t.amount),0) || 1;
-
     return {
-      totalBalance, investments, netWorth,
-      income, expenses, savings,
+      totalBalance, investments, netWorth, income, expenses, savings,
       incomePct: ((income - prevIncome)/prevIncome*100),
       expensesPct: ((expenses - prevExpenses)/prevExpenses*100),
-      savingsPct: 12,
-      investedPct: 5.3
+      savingsPct: 12, investedPct: 5.3
     };
   }
 
-  // ============================================================
-  // RENDER: DASHBOARD
-  // ============================================================
   function renderDashboard() {
     const m = getMetrics();
     $('netWorthValue').textContent = fmt(m.netWorth);
@@ -821,7 +850,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     $('investedSub').textContent = '+' + m.investedPct + '%';
     $('walletBadge').textContent = fmtShort(m.totalBalance);
 
-    // weekly chart — sum last 7 days
     const bars = $('chartBars');
     bars.innerHTML = '';
     const dayNames = ['S','M','T','W','T','F','S'];
@@ -843,7 +871,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
       bars.appendChild(div);
     });
 
-    // recent transactions
     const txList = $('txList');
     const sorted = [...state.transactions].sort((a,b) => b.date.localeCompare(a.date)).slice(0,5);
     if (!sorted.length) {
@@ -863,7 +890,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
       `).join('');
     }
 
-    // budget overview
     const bOv = $('budgetOverview');
     bOv.innerHTML = state.budgets.slice(0,4).map(b => {
       const pct = Math.min(100, Math.round(b.spent/b.limit*100));
@@ -874,7 +900,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
       </div>`;
     }).join('');
 
-    // goals overview
     const gOv = $('goalsOverview');
     gOv.innerHTML = state.goals.slice(0,3).map(g => {
       const pct = Math.round(g.saved/g.target*100);
@@ -888,9 +913,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     }).join('');
   }
 
-  // ============================================================
-  // RENDER: ACCOUNTS
-  // ============================================================
   function renderAccounts() {
     const grid = $('accountsGrid');
     grid.innerHTML = state.accounts.map(a => `
@@ -906,12 +928,8 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     `).join('');
   }
 
-  // ============================================================
-  // RENDER: TRANSACTIONS
-  // ============================================================
   let txFilter = 'all';
   let txQuery = '';
-
   function renderTransactions() {
     let list = [...state.transactions].sort((a,b) => b.date.localeCompare(a.date));
     if (txFilter === 'income') list = list.filter(t => t.amount > 0);
@@ -937,27 +955,20 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     `).join('');
   }
 
-  // ============================================================
-  // RENDER: BUDGETS
-  // ============================================================
   function renderBudgets() {
     const el = $('budgetsFullList');
     el.innerHTML = state.budgets.map(b => {
       const pct = Math.min(100, Math.round(b.spent/b.limit*100));
-      const cls = pct > 90 ? 'danger' : pct > 70 ? 'warn' : '';
       return `<div class="budget-full-item">
         <div class="top">
           <span class="cat">${b.category}</span>
           <span class="amt">$${b.spent} / $${b.limit} · ${pct}%</span>
         </div>
-        <div class="bar-track"><div class="bar-fill ${cls}" style="width:${pct}%;background:${pct>90?'var(--danger)':pct>70?'var(--warning)':b.color};"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${pct>90?'var(--danger)':pct>70?'var(--warning)':b.color};"></div></div>
       </div>`;
     }).join('');
   }
 
-  // ============================================================
-  // RENDER: BILLS
-  // ============================================================
   function renderBills() {
     const el = $('billsList');
     el.innerHTML = state.bills.map(b => `
@@ -980,9 +991,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     });
   }
 
-  // ============================================================
-  // RENDER: INVESTMENTS
-  // ============================================================
   function renderInvestments() {
     const total = state.investments.reduce((s,i) => s+i.value, 0);
     $('invTotal').textContent = fmt(total);
@@ -1000,14 +1008,11 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
       const pct = total ? Math.round(i.value/total*100) : 0;
       return `<div style="margin-bottom:14px;">
         <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--text-secondary);"><span>${i.symbol} · ${i.name}</span><span>${pct}%</span></div>
-        <div class="inv-bar-track" style="background:#e3eaf2;"><div style="height:8px;border-radius:20px;background:var(--accent);width:${pct}%;"></div></div>
+        <div class="inv-bar-track"><div style="height:8px;border-radius:20px;background:var(--accent);width:${pct}%;"></div></div>
       </div>`;
     }).join('');
   }
 
-  // ============================================================
-  // RENDER: GOALS
-  // ============================================================
   function renderGoals() {
     const el = $('goalsFullList');
     el.innerHTML = state.goals.map(g => {
@@ -1022,9 +1027,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     }).join('');
   }
 
-  // ============================================================
-  // RENDER: CREDIT
-  // ============================================================
   function renderCredit() {
     const creditAcc = state.accounts.find(a => a.type === 'Credit');
     const creditLimit = 5000;
@@ -1033,9 +1035,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     $('utilizationText').textContent = util + '%';
   }
 
-  // ============================================================
-  // RENDER: REPORTS
-  // ============================================================
   function renderReports() {
     const m = getMetrics();
     $('rptIncome').textContent = fmt(m.income);
@@ -1044,9 +1043,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     $('rptRate').textContent = m.income ? Math.round(m.savings/m.income*100) + '%' : '0%';
   }
 
-  // ============================================================
-  // RENDER ALL
-  // ============================================================
   function renderAll() {
     renderDashboard();
     renderAccounts();
@@ -1060,9 +1056,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     renderCalendar();
   }
 
-  // ============================================================
-  // CALENDAR
-  // ============================================================
   function renderCalendar() {
     const grid = $('calendarGrid');
     grid.innerHTML = '';
@@ -1072,9 +1065,8 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
       el.textContent = d;
       grid.appendChild(el);
     });
-    // Aug 2026 starts on Saturday
-    const firstDay = new Date(2026,7,1).getDay(); // 6 = Sat
-    const offset = (firstDay + 6) % 7; // Monday-first
+    const firstDay = new Date(2026,7,1).getDay();
+    const offset = (firstDay + 6) % 7;
     for (let i=0;i<offset;i++) {
       const el = document.createElement('div');
       el.className = 'cal-day empty';
@@ -1093,27 +1085,16 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     }
   }
 
-  // ============================================================
-  // ACTIONS
-  // ============================================================
   function addTransaction({name, amount, category, account}) {
     const iconMap = {
       income:'fa-wallet', food:'fa-utensils', utilities:'fa-bolt', transport:'fa-car',
       shopping:'fa-bag-shopping', health:'fa-heart-pulse', entertainment:'fa-film',
       rent:'fa-house', subscription:'fa-tv', transfer:'fa-arrow-right', other:'fa-circle'
     };
-    const tx = {
-      id: uid('t'), date: today(), name, category, amount,
-      account: account || 'acc-checking',
-      icon: iconMap[category] || 'fa-circle'
-    };
+    const tx = { id: uid('t'), date: today(), name, category, amount, account: account || 'acc-checking', icon: iconMap[category] || 'fa-circle' };
     state.transactions.push(tx);
-
-    // update account balance
     const acc = state.accounts.find(a => a.id === tx.account);
     if (acc) acc.balance += amount;
-
-    // update budget
     if (amount < 0 && category) {
       const budget = state.budgets.find(b => b.category.toLowerCase().includes(category) || category.includes(b.category.toLowerCase().split(' ')[0]));
       if (budget) budget.spent += Math.abs(amount);
@@ -1130,7 +1111,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     from.balance -= amount;
     to.balance += amount;
     state.transfers.push({ id: uid('tr'), from: fromId, to: toId, amount, date: today(), note: note||'Transfer' });
-    // ledger entries
     addTransaction({ name:`Transfer to ${to.name}`, amount:-amount, category:'transfer', account:fromId });
     addTransaction({ name:`Transfer from ${from.name}`, amount:amount, category:'income', account:toId });
     saveState(); renderAll();
@@ -1150,9 +1130,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     showToast(`Paid ${bill.name} · ${fmt(bill.amount)}`, 'fa-check-circle');
   }
 
-  // ============================================================
-  // QUICK ACTIONS
-  // ============================================================
   const actionMap = {
     add:      { title:'Add transaction', desc:'Enter amount and category to record.', placeholder:'e.g. 45.00 food', handler: handleAdd },
     transfer: { title:'Transfer money', desc:'Enter amount and destination account.', placeholder:'e.g. 200.00 savings', handler: handleTransfer },
@@ -1191,9 +1168,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     showToast(`Report: income ${fmt(m.income)} · expenses ${fmt(m.expenses)} · savings ${fmt(m.savings)}`, 'fa-chart-pie');
   }
 
-  // ============================================================
-  // REMINDERS
-  // ============================================================
   let currentReminderDate = null;
   function openReminderModal(dateStr) {
     currentReminderDate = dateStr;
@@ -1239,9 +1213,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     showToast('Reminder saved!', 'fa-check-circle');
   }
 
-  // ============================================================
-  // PAYMENT FORM
-  // ============================================================
   function setupPaymentForm() {
     document.querySelectorAll('.payment-methods label').forEach(label => {
       label.addEventListener('click', function() {
@@ -1251,22 +1222,18 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
         if (radio) radio.checked = true;
       });
     });
-
     $('paymentForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const payee = $('payeeName').value.trim();
       const amount = parseFloat($('paymentAmount').value);
       const category = $('paymentCategory').value;
       if (!payee || !amount || amount <= 0) { showToast('Please fill payee and a valid amount.', 'fa-exclamation-circle'); return; }
-
       const conf = 'TX-' + today().replace(/-/g,'') + '-' + String(Math.floor(Math.random()*10000)).padStart(4,'0');
       $('confirmationNumber').textContent = conf;
       $('paymentSuccess').classList.add('show');
       $('payBtn').disabled = true;
       $('payBtn').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-
       setTimeout(() => {
-        // add transaction
         addTransaction({ name: payee + ' (payment)', amount: -amount, category, account:'acc-checking' });
         $('paymentSuccess').classList.remove('show');
         $('payBtn').disabled = false;
@@ -1281,14 +1248,40 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     });
   }
 
-  // ============================================================
-  // NAVIGATION
-  // ============================================================
+  // ---------- NAVIGATION ----------
   const pages = {};
   document.querySelectorAll('[id^="page-"]').forEach(p => pages[p.id.replace('page-','')] = p);
-  document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', () => {
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  // Close all submenus helper
+  function closeAllSubmenus() {
+    document.querySelectorAll('.nav-group-btn').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.nav-submenu').forEach(s => s.classList.remove('open'));
+  }
+
+  // Group toggle: opens the submenu; clicking again closes it
+  document.querySelectorAll('.nav-group-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const group = btn.dataset.group;
+      const submenu = document.querySelector(`.nav-submenu[data-group="${group}"]`);
+      const isOpen = btn.classList.contains('open');
+
+      // Close all
+      closeAllSubmenus();
+
+      // If it wasn't open, open it
+      if (!isOpen) {
+        btn.classList.add('open');
+        submenu.classList.add('open');
+      }
+    });
+  });
+
+  // Subitem click: switch page and close the submenu
+  document.querySelectorAll('.nav-subitem').forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('.nav-subitem').forEach(n => n.classList.remove('active'));
       item.classList.add('active');
       const page = item.dataset.page;
       Object.keys(pages).forEach(k => pages[k].style.display = k === page ? 'block' : 'none');
@@ -1298,28 +1291,34 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
       if (page === 'bills') renderBills();
       if (page === 'investments') renderInvestments();
       if (page === 'goals') renderGoals();
+      // Close the dropdown after selection
+      closeAllSubmenus();
     });
   });
+
+  // Close all dropdowns on any click outside the sidebar
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.sidebar')) {
+      closeAllSubmenus();
+    }
+  });
+
   document.querySelectorAll('[data-goto]').forEach(el => {
     el.addEventListener('click', (e) => {
       e.preventDefault();
       const target = el.dataset.goto;
-      document.querySelector(`.nav-item[data-page="${target}"]`)?.click();
+      const targetItem = document.querySelector(`.nav-subitem[data-page="${target}"]`);
+      if (targetItem) targetItem.click();
     });
   });
 
-  // ============================================================
-  // EVENTS
-  // ============================================================
   function setupEvents() {
-    // account dropdown
     const toggle = $('accountToggle'), dd = $('accountDropdown');
     toggle.addEventListener('click', e => { e.stopPropagation(); dd.classList.toggle('open'); });
     document.addEventListener('click', e => {
       if (!document.querySelector('.account-wrapper').contains(e.target)) dd.classList.remove('open');
     });
 
-    // theme
     const saved = localStorage.getItem('finly-theme');
     if (saved === 'dark') { document.body.classList.add('dark'); $('themeToggle').innerHTML = '<i class="fas fa-sun"></i>'; }
     $('themeToggle').addEventListener('click', () => {
@@ -1329,7 +1328,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
       $('themeToggle').innerHTML = dark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     });
 
-    // quick action buttons
     document.querySelectorAll('.action-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const action = btn.dataset.action;
@@ -1352,7 +1350,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     });
     $('panelInput').addEventListener('keypress', e => { if (e.key === 'Enter') $('panelActionBtn').click(); });
 
-    // hero buttons
     $('heroAddMoney').addEventListener('click', () => {
       const amount = parseFloat(prompt('Amount to add to checking?', '500'));
       if (!amount || amount <= 0) return;
@@ -1370,7 +1367,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
       transferMoney(from.id, to.id, amount, 'Hero transfer');
     });
 
-    // link account
     $('linkAccountBtn').addEventListener('click', () => {
       const name = prompt('Mock Plaid: account name?', 'New Savings');
       if (!name) return;
@@ -1378,17 +1374,11 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
       const bal = parseFloat(prompt('Starting balance?', '1000')) || 0;
       const colors = { Checking:'#1e7b4c', Savings:'#2e6f9e', Credit:'#cd7b2b', Investment:'#1f5b8a', Crypto:'#8b5cf6', Loan:'#b13e3e' };
       const icons = { Checking:'fa-wallet', Savings:'fa-piggy-bank', Credit:'fa-credit-card', Investment:'fa-chart-line', Crypto:'fa-bitcoin-sign', Loan:'fa-car' };
-      state.accounts.push({
-        id: uid('acc'), name, type: type || 'Savings',
-        icon: icons[type] || 'fa-wallet',
-        color: colors[type] || '#1e7b4c',
-        balance: bal
-      });
+      state.accounts.push({ id: uid('acc'), name, type: type || 'Savings', icon: icons[type] || 'fa-wallet', color: colors[type] || '#1e7b4c', balance: bal });
       saveState(); renderAll();
       showToast(`Linked ${name}`, 'fa-link');
     });
 
-    // transaction filter
     document.querySelectorAll('.filter-chip[data-filter]').forEach(chip => {
       chip.addEventListener('click', () => {
         document.querySelectorAll('.filter-chip[data-filter]').forEach(c => c.classList.remove('active'));
@@ -1399,7 +1389,6 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     });
     $('txSearch').addEventListener('input', e => { txQuery = e.target.value; renderTransactions(); });
 
-    // reminder modal
     $('closeModalBtn').addEventListener('click', closeReminderModal);
     $('reminderModal').addEventListener('click', e => { if (e.target === $('reminderModal')) closeReminderModal(); });
     $('saveReminderBtn').addEventListener('click', saveReminder);
@@ -1408,17 +1397,11 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
     setupPaymentForm();
   }
 
-  // ============================================================
-  // INIT
-  // ============================================================
   function init() {
-    // set today's date display
     const d = new Date();
     $('currentDate').textContent = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-    // mark today in calendar
     renderAll();
     setupEvents();
-    // welcome toast
     setTimeout(() => showToast('Welcome to Finly · state persisted locally', 'fa-leaf'), 500);
   }
 

@@ -41,7 +41,7 @@ body.dark .inv-bar-track{background:#2a343f;}
 body.dark .filter-chip{background:#2a343f;border-color:var(--border);}
 body.dark .filter-chip.active{background:#1a3a2a;border-color:var(--accent);}
 
-.app{max-width:1440px;width:100%;background:var(--surface);border-radius:var(--radius-xl);box-shadow:var(--shadow);padding:28px 28px 200px;transition:background 0.2s,color 0.2s;}
+
 .app-grid{display:flex;gap:28px;align-items:flex-start;}
 .sidebar{width:240px;flex-shrink:0;display:flex;flex-direction:column;gap:4px;position:sticky;top:20px;align-self:flex-start;}
 .sidebar .logo{margin-bottom:20px;padding-left:8px;}
@@ -319,6 +319,8 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
   .calendar-grid{gap:3px;}
   .cal-day{padding:5px 1px;font-size:0.7rem;}
 }
+
+.app{max-width:1440px;width:100%;background:var(--surface);border-radius:var(--radius-xl);box-shadow:var(--shadow);padding:28px 28px 200px;transition:background 0.2s,color 0.2s;}
 </style>
 </head>
 <body>
@@ -1408,6 +1410,23 @@ body.dark .budget-full-item .bar-track{background:#2a343f;}
   init();
 
 })();
+</script>
+
+<!-- Desktop recommendation banner -->
+<div id="desktopBanner" style="
+  position:fixed; top:0; left:0; right:0;
+  background:#1e7b4c; color:#fff;
+  font-size:0.85rem; padding:10px 16px;
+  text-align:center; z-index:3000;
+  display:none; align-items:center; justify-content:center; gap:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+">
+  <i class="fas fa-desktop"></i>
+  <span>For the best experience, please use a computer.</span>
+  <button onclick="document.getElementById('desktopBanner').style.display='none';document.body.style.paddingTop='';"
+          style="background:transparent;border:none;color:#fff;font-size:1.2rem;cursor:pointer;line-height:1;margin-left:8px;">&times;</button>
+</div>
+  
 </script>
 </body>
 </html>
